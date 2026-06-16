@@ -42,5 +42,33 @@ Infrastruktura odpowiedzialna za nawigację. W celu znajdywania najkrótszej śc
 
 ## Uruchomienie
 
+Program stworzono na systemie linux. Plik wykonywalny jako argument przyjmuje ścieżkę do pliku konfiguracyjnego. W przypadku braku pliku zostanie załadowany domyślny layout więzienia.
 
+### Przykładowy plik konfiguracyjny
+
+\# Liczba pracownikow
+GUARDS 2
+COOKS 2
+JANITORS 1
+DOCTORS 1
+
+\# Liczba wiezniow
+PRISONERS 6
+
+\# Pokoje: ID TYPE CAPACITY
+ROOM 0 CANTINE 10
+ROOM 1 CELL 3
+ROOM 2 CELL 3
+ROOM 3 LOBBY 5
+ROOM 4 LAUNDRY 2
+ROOM 5 HOSPITAL 5
+
+\# Korytarze: FROM TO DISTANCE
+LINK 0 1 3
+LINK 0 2 3
+LINK 0 3 2
+LINK 1 2 2
+LINK 4 3 2
+LINK 3 5 3
+LINK 1 4 5
 
