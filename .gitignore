@@ -1,0 +1,46 @@
+# Katalog Build
+build/
+cmake-build-*/
+out/
+dist/
+
+# CMake cache
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+*.cmake
+
+# Skompilowane pliki binarne i biblioteki
+*.o
+*.a
+*.so
+*.dylib
+*.exe
+prison_sim
+
+# Pliki związane z IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+.DS_Store
+
+# CLion
+cmake-build-debug/
+cmake-build-release/
+
+# Pliki systemowe
+*.log
+.env
+.envrc
+
+# Pliki tymczasowe
+*.tmp
+*.bak
+
+# Sekretne pliki
+secret*
