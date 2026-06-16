@@ -47,28 +47,46 @@ Program stworzono na systemie linux. Plik wykonywalny jako argument przyjmuje ś
 ### Przykładowy plik konfiguracyjny
 
 \# Liczba pracownikow
+<br>
 GUARDS 2
+<br>
 COOKS 2
+<br>
 JANITORS 1
+<br>
 DOCTORS 1
 
 \# Liczba wiezniow
+<br>
 PRISONERS 6
 
 \# Pokoje: ID TYPE CAPACITY
+<br>
 ROOM 0 CANTINE 10
+<br>
 ROOM 1 CELL 3
+<br>
 ROOM 2 CELL 3
+<br>
 ROOM 3 LOBBY 5
+<br>
 ROOM 4 LAUNDRY 2
+<br>
 ROOM 5 HOSPITAL 5
 
 \# Korytarze: FROM TO DISTANCE
+<br>
 LINK 0 1 3
+<br>
 LINK 0 2 3
+<br>
 LINK 0 3 2
+<br>
 LINK 1 2 2
+<br>
 LINK 4 3 2
+<br>
 LINK 3 5 3
+<br>
 LINK 1 4 5
 
