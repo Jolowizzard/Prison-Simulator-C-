@@ -2,7 +2,7 @@
 
 ## Założenia projektowe
 
-Tematem symulacji będzie placówka więzienna, składająca się z różnych pomieszczeń. Każdy więzień będzie traktowany jako osobny program, któremu na początku głównego programu zostanie wydzielony odpowiedni obszar w pamięci. Wynika z tego, że więzień będzie osobnym procesem, który podczas pracy symulacji będzie próbował wykonywać odgórnie zaprogramowane akcje. 
+Tematem symulacji będzie placówka więzienna, składająca się z różnych pomieszczeń. Każdy więzień będzie traktowany jako osobny program (biblioteki `unistd.h`, `sys/mman.h`, `sys/wait.h`), któremu na początku głównego programu zostanie wydzielony odpowiedni obszar w pamięci. Wynika z tego, że więzień będzie osobnym procesem, który podczas pracy symulacji będzie próbował wykonywać odgórnie zaprogramowane akcje. 
 
 Zachowanie więźnia będzie zależne od jego poziomu niezadowolenia i ogólnego zdrowia psychicznego. Przy wyższym poziomie agresji więzień będzie próbował wdać się w bójkę z innym więźniem znajdującym się w tym samym pomieszczeniu, tym samym raniąc go lub samemu zostając rannym. Liczba ran nabytych w wyniku bójki będzie zależna od czasu jej trwania - bójka może zostać natychmiast przerwana, jeżeli strażnik jest dostępny (semafor ze strażnikami). Rany zostają opatrzone i wyleczone w więziennym szpitalu. 
 
@@ -10,7 +10,7 @@ Poszczególne pomieszczenia będą wpływać w różny sposób na poziom agresji
 * **Izolatka** – będzie zmniejszać poziom agresji i wartość zdrowia psychicznego,
 * **Stołówka** – będzie zmniejszać poziom głodu (utrzymujący się wysoki poziom głodu będzie stopniowo zwiększać poziom agresji).
 
-Tak samo, w każdym pomieszczeniu może znajdować się różny personel, który będzie zajmował się więźniami. W wyniku symulacji użytkownik otrzyma zbiór danych potrzebnych do ulepszenia swojego planu więzienia - zmiana liczby personelu, dodanie innych pomieszczeń itp. Proces symulacji będzie można śledzić w GUI wyświetlanym w terminalu (biblioteka `ncurses`).
+Tak samo, w każdym pomieszczeniu może znajdować się różny personel, który będzie zajmował się więźniami. W wyniku symulacji użytkownik otrzyma zbiór danych potrzebnych do ulepszenia swojego planu więzienia - zmiana liczby personelu, dodanie innych pomieszczeń itp. Proces symulacji będzie można śledzić w GUI wyświetlanym w terminalu (biblioteka `ncurses`). Do budowy wykorzystano narzędzie CMake w wersji 3.28.3.
 
 ## Realizacja poszczególnych modułów
 
@@ -42,51 +42,41 @@ Infrastruktura odpowiedzialna za nawigację. W celu znajdywania najkrótszej śc
 
 ## Uruchomienie
 
-Program stworzono na systemie linux. Plik wykonywalny jako argument przyjmuje ścieżkę do pliku konfiguracyjnego. W przypadku braku pliku zostanie załadowany domyślny layout więzienia.
+Program został stworzony na system linux. W celu wygenerowania pliku wykonywalnego należy skorzystać z CMake.
+```text
+mkdir build
+cd build
+cmake ..
+cmake --build
+```
+ Plik wykonywalny będzie znajdować się w katalogu build/src. Plik jako argument przyjmuje ścieżkę do pliku konfiguracyjnego. W przypadku braku pliku zostanie załadowany domyślny layout więzienia.
 
 ### Przykładowy plik konfiguracyjny
 
-\# Liczba pracownikow
-<br>
+```text
+# Liczba pracownikow
 GUARDS 2
-<br>
 COOKS 2
-<br>
 JANITORS 1
-<br>
 DOCTORS 1
 
-\# Liczba wiezniow
-<br>
+# Liczba wiezniow
 PRISONERS 6
 
-\# Pokoje: ID TYPE CAPACITY
-<br>
+# Pokoje: ID TYPE CAPACITY
 ROOM 0 CANTINE 10
-<br>
 ROOM 1 CELL 3
-<br>
 ROOM 2 CELL 3
-<br>
 ROOM 3 LOBBY 5
-<br>
 ROOM 4 LAUNDRY 2
-<br>
 ROOM 5 HOSPITAL 5
 
-\# Korytarze: FROM TO DISTANCE
-<br>
+# Korytarze: FROM TO DISTANCE
 LINK 0 1 3
-<br>
 LINK 0 2 3
-<br>
 LINK 0 3 2
-<br>
 LINK 1 2 2
-<br>
 LINK 4 3 2
-<br>
 LINK 3 5 3
-<br>
 LINK 1 4 5
-
+```
