@@ -1,5 +1,6 @@
 #pragma once
 #include "SimulationCore.hpp"
+#include <unistd.h>
 
 class SimulationProcess {
 protected:
